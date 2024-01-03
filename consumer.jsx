@@ -32,6 +32,17 @@ export const getUser = async (token) => {
 
 }
 
+export const getUsers = async (token) => {
+    try{
+        const response = await axios.get("http://127.0.0.1:8000/user-list",{
+            headers:  { "Authorization": `Bearer ${token}` }
+        })
+        return response.data
+    } catch (err){
+        console.error(err);
+    }
+}
+
 export const getChats = async (token) => {
     try {
         const response = await axios.get("http://127.0.0.1:8000/chats", {
@@ -47,6 +58,17 @@ export const getChat = async (id, token) => {
     try {
         const response = await axios.get(`http://127.0.0.1:8000/chats/${id}`, {
             headers: { "Authorization": `Bearer ${token}` }
+        })
+        return response.data
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export const createChat = async (token, users) => {
+    try {
+        const response = await axios.post(`http://127.0.0.1:8000/chats/`, {users},{
+            headers: { "Authorization": `Bearer ${token}` },
         })
         return response.data
     } catch (err) {

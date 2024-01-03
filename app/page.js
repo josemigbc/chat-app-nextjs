@@ -5,6 +5,7 @@ import { useAuth } from "@/useAuth";
 import { useEffect, useState } from "react";
 import useWebSocket from 'react-use-websocket'
 import { getChats } from "@/consumer";
+import NewButton from "./NewButton";
 
 export default function Home() {
 
@@ -43,6 +44,7 @@ export default function Home() {
       <MainHeader />
       <main>
         {!chats ? <p className="text-lg text-center">Loading...</p> : <ChatList data={chats} />}
+        <NewButton/>
       </main>
     </>
   )

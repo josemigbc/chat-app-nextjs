@@ -6,6 +6,7 @@ import MessageForm from "./MessageForm"
 import { useAuth } from "@/useAuth";
 import useWebSocket from "react-use-websocket";
 import { getChat } from "@/consumer";
+import {notFound} from 'next/navigation'
 
 export default function Page({ params }) {
 
@@ -33,7 +34,7 @@ export default function Page({ params }) {
         const load = async () => {
             if (token) {
                 const chatData = await getChat(params.chatId, token)
-                const _user = chatData.users.filter(u => u.id !== user.id)[0].username
+                const _user = chatData?.users.filter(u => u.id !== user.id)[0].username
                 setChat(chatData);
                 setUserTo(_user)
             }
@@ -45,6 +46,10 @@ export default function Page({ params }) {
     useEffect(() => {
         window && window.scrollTo(0, document.body.scrollHeight)
     }, [chat])
+
+    if (chat === undefined){
+        notFound()
+    }
 
     return (
         <>

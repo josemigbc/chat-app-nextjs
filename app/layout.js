@@ -8,7 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="py-20">
+      <body className="py-20 min-h-screen">
         {children}
       </body>
     </html>
