@@ -26,7 +26,7 @@ export default function Page() {
             <main className="p-2">
                 <div className="flex flex-col gap-2">
                     {!users ? <p className="text-lg text-center">Loading...</p> : users.map(user => (
-                        <UserContainer data={user}/>
+                        <UserContainer key={user.id} data={user}/>
                     )) }
                 </div>
             </main>

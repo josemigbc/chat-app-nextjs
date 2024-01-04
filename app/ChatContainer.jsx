@@ -5,7 +5,7 @@ export default function ChatContainer({data}) {
 
     const { user } = useAuth()
     const text = data.last_message ? data.last_message.text: ''
-    const userTo = data.users.filter(u => u.id != user?.id)[0].username
+    const userTo = data.users.filter(u => u.id !== user?.id)[0].username
 
     return (
         <div className='flex justify-start gap-2 items-center mb-3'>

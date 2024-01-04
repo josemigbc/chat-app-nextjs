@@ -28,11 +28,11 @@ export default function Home() {
   // Effect to resort chats array when a new message is received. 
   useEffect(() => {
     if (lastJsonMessage) {
-      const chat = chats.filter(ch => ch.id === lastJsonMessage.chat_id)[0] //Get the chat by chat_id
-      const i = chats.indexOf(chat)
-      chat.last_message = lastJsonMessage
       // Drop chat from array and added in the start
       setChats(prevChats => {
+        const chat = prevChats.filter(ch => ch.id === lastJsonMessage.chat_id)[0] //Get the chat by chat_id
+        const i = prevChats.indexOf(chat)
+        chat.last_message = lastJsonMessage
         prevChats.splice(i, 1);
         return [chat, ...prevChats]
       })
@@ -44,7 +44,7 @@ export default function Home() {
       <MainHeader />
       <main>
         {!chats ? <p className="text-lg text-center">Loading...</p> : <ChatList data={chats} />}
-        <NewButton/>
+        <NewButton />
       </main>
     </>
   )
