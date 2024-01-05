@@ -27,7 +27,7 @@ export default function Home() {
 
   // Effect to resort chats array when a new message is received. 
   useEffect(() => {
-    if (lastJsonMessage) {
+    if (lastJsonMessage && chats) {
       // Drop chat from array and added in the start
       setChats(prevChats => {
         const chat = prevChats.filter(ch => ch.id === lastJsonMessage.chat_id)[0] //Get the chat by chat_id

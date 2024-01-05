@@ -9,7 +9,7 @@ export const createTestUser = (n) => {
     return users
 }
 
-export const createTestMessage = (n) => {
+export const createTestMessage = (n, textMessage="test message") => {
     const messages = []
     for (let i = 0; i < n; i++){
         messages.push({
@@ -18,7 +18,7 @@ export const createTestMessage = (n) => {
                 id: i % 2 + 1,
                 username: `test${i % 2 + 1}`,
             },
-            text: "test message",
+            text: textMessage,
             utcDate: new Date().toISOString()
         })
     }
@@ -31,14 +31,14 @@ export const createTestChat = (n) => {
         chats.push({
             id: i,
             users: createTestUser(2),
-            last_message: createTestMessage(1)[0]
+            last_message: {...createTestMessage(1)[0], chat_id: i}
         })
     }
     return chats
 }
 
-export const createTestOneChat = () => ({
-    id: 1,
+export const createTestOneChat = (id=1) => ({
+    id: id,
     users: createTestUser(2),
-    messages: createTestMessage(5)
+    messages: createTestMessage(5).map(msg => ({...msg, chat_id: 1}))
 })

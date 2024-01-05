@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/jest-globals'
 import { describe, expect, test } from "@jest/globals"
-import { getAllByText, render, screen, waitForElementToBeRemoved } from '@testing-library/react'
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react'
 import Home from '@/app/page'
 import { default as PageChatId } from "@/app/[chatId]/page"
 import { default as PageNewChat } from '@/app/new/page'
@@ -15,7 +15,7 @@ jest.mock("../consumer", () => {
         ...originalModule,
         getChats: jest.fn(async (access_token) => access_token === "tokenTest" ? createTestChat(5) : null),
         getUsers: jest.fn(async (access_token) => access_token === "tokenTest" ? createTestUser(5) : null),
-        getChat: jest.fn(async (id , access_token) => access_token === "tokenTest" ? createTestOneChat() : null),
+        getChat: jest.fn(async (id, access_token) => access_token === "tokenTest" ? createTestOneChat() : null),
     }
 })
 
@@ -30,14 +30,14 @@ const testPageComponents = async (component, label) => {
         })
         test(`rendering with fetch data with correct access token. ${label}`, async () => {
             localStorage.setItem("access_token", "tokenTest")
-            localStorage.setItem("user", JSON.stringify({"id": 1, "username": "test1"}))
+            localStorage.setItem("user", JSON.stringify({ "id": 1, "username": "test1" }))
             render(component)
             const loading = screen.getByText('Loading...')
             expect(loading).toBeInTheDocument()
             await waitForElementToBeRemoved(loading)
             if (label === 'pageChatId') {
                 expect(screen.getAllByText("test message").length).toBe(5)
-            } else if (label === 'pageNew'){
+            } else if (label === 'pageNew') {
                 for (let i = 1; i < 6; i++) {
                     expect(screen.getByText(`test${i}`)).toBeInTheDocument()
                 }

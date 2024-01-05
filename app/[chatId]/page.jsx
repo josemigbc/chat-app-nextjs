@@ -22,13 +22,6 @@ export default function Page({ params }) {
         }))
     }
 
-    //Effect to render the new coming message if it belongs the chat.
-    useEffect(() => {
-        if (lastJsonMessage && lastJsonMessage.chat_id == params.chatId) {
-            appendMessage(lastJsonMessage);
-        }
-    }, [lastJsonMessage, params.chatId])
-
     //Effect to fetch the messages
     useEffect(() => {
         const load = async () => {
@@ -41,6 +34,13 @@ export default function Page({ params }) {
         }
         load();
     }, [params.chatId, user, token])
+
+    //Effect to render the new coming message if it belongs the chat.
+    useEffect(() => {
+        if (lastJsonMessage && lastJsonMessage.chat_id == params.chatId && chat) {
+            appendMessage(lastJsonMessage);
+        }
+    }, [lastJsonMessage, params.chatId])
 
     //Effect to set the scroll in the chat's last_message.
     useEffect(() => {
