@@ -8,7 +8,7 @@ describe("Chat Container", () => {
     test("Render Chat Container", ()=> {
         localStorage.setItem('user',JSON.stringify({id:1}))
         render(<ChatContainer data={ createTestChat(1)[0] }/>)
-        expect(screen.getByText("Test message")).toBeInTheDocument()
+        expect(screen.getByText("test message")).toBeInTheDocument()
         expect(screen.getByText("test2")).toBeInTheDocument()
     })
     test("Render Chat Container without last_message.", ()=>{
